@@ -1,0 +1,6 @@
+---
+app_user: "ubuntu"
+http_host: "web1"
+http_conf: "web1.conf"
+http_port: "80"
+disable_default: true
