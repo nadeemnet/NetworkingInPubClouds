@@ -239,3 +239,15 @@ host private_server 10.0.2.100
   IdentityFile ~/NetworkingInPubClouds.pem
   ProxyCommand ssh -q -W %h:%p jumphost
 ```
+
+## Verification
+
+1. Verified that jumphost can be accessed through SSH from admin host only.
+2. Verified that web server can be accessed from anywhere.
+3. Verified that jumphost can access both public and private server through SSH.
+4. Verified that web server can access Internet (for security patches etc.)
+5. Verified that private server can access Internet through NAT GW (for security patches etc.)
+
+If needed, outbound Internet access can be disabled by removing a security group.
+
+
