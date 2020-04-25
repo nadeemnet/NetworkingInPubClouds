@@ -1,0 +1,6 @@
+---
+app_user: "ubuntu"
+http_host: "www"
+http_conf: "www.conf"
+http_port: "80"
+disable_default: true
