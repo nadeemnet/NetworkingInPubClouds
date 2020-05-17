@@ -1,0 +1,2 @@
+public_server ansible_host=10.0.1.100
+private_server ansible_host=10.0.2.100

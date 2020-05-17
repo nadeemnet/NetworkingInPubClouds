@@ -1,0 +1,27 @@
+{
+  "jumphost_ip": {
+    "sensitive": false,
+    "type": "string",
+    "value": "54.227.30.116"
+  },
+  "my_public_ip": {
+    "sensitive": false,
+    "type": "string",
+    "value": "37.210.173.150"
+  },
+  "private-svr-ipv6": {
+    "sensitive": false,
+    "type": "string",
+    "value": "2600:1f18:17e:fa02:ac7c:fa25:50f0:28c0"
+  },
+  "pub-svr-ipv4": {
+    "sensitive": false,
+    "type": "string",
+    "value": "34.207.109.74"
+  },
+  "pub-svr-ipv6": {
+    "sensitive": false,
+    "type": "string",
+    "value": "2600:1f18:17e:fa01:5ad8:a7a2:6faf:b17d"
+  }
+}
