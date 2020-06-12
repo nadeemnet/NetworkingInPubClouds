@@ -199,11 +199,18 @@ resource "local_file" "ssh-config" {
 ```
 
 ## Ansible Playbook to install awslogs package to jumphost.
-This playbook is described in file pb_jumphost.yml. It installs awslogs package, and configures it so that all messages in file /var/log/secure are sent to Cloudwatch. Note /var/log/secure is where centos keeps all sshd related logs.
+Amazon CloudWatch Logs can be used to monitor, store, and access log files from EC2 instances. I chose to use it for sending auth logs from jumphost. Ansible installs awslogs package, and configures it so that all messages in file /var/log/secure are sent to Cloudwatch. Note /var/log/secure is where centos keeps all sshd related logs. This playbook is described in file pb_jumphost.yml
 
 ```
-ansible-playbook -i hosts --ssh-common-args '-F ssh-config' pb_jumphost.yml
-ansible-playbook -i hosts --ssh-common-args '-F ssh-config' pb_webserver.yml 
+ansible-playbook -i hosts --ssh-common-args '-F ssh-config' pb_jumphost.yml 
 ```
 
+Here is how the login/logout logs look at Cloudwatch
 
+```
+Jun 9 09:49:16 ip-10-0-1-101 sshd[4915]: Accepted publickey for ec2-user from 37.210.173.150 port 7679 ssh2: RSA SHA256:j826sZJNqf5LXjyoar4sazCbX2GHXL9Wsr5
+
+
+Jun  9 09:52:01 ip-10-0-1-101 sshd[4933]: Received disconnect from 37.210.173.150 port 7679:11: disconnected by user
+Jun 9 09:52:01 ip-10-0-1-101 sshd[4933]: Disconnected from 37.210.173.150 port 7679
+```
