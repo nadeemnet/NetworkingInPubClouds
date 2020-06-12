@@ -3,12 +3,12 @@
 This project builds on top of the previous one. Here is a list of security measures carried from the previous project work.
 
 1. Public/Web server access is restricted to HTTP protocol from anywhere.
-2. jumphost is acessible only on tcp/22 from administrator's host.
+2. jumphost is accessible only on tcp/22 from administrator's host.
 3. Private servers is not directly accessible from outside world.
-4. SSH access to public and private servers is available throught jumphost only
+4. SSH access to public and private servers is available through jumphost only
 5. All of above restrictions are achieved through AWS security groups.
 
-As a part of this project, following additional security measures are implemented.
+**As a part of this project, following additional security measures are implemented**
 
 1. An IAM Policy is created that allows read-only access to EC2 and VPC.
 2. An IAM Policy is created that allows full access to one S3 bucket specific to this project. All other S3 access requests are denied
@@ -178,7 +178,7 @@ iam_instance_profile = aws_iam_instance_profile.CloudWatchLogs.name
 ansible-playbook -i hosts --ssh-common-args '-F ssh-config' pb_webserver.yml
 
 ## Ansible inventory file
-In previous project, I used AWS dynamic plugin to build Ansible hosts file. Here I took a different approach by using jinja template. Terraform's template rendering fuction is used to fill jumphost's public IP address.
+In previous project, I used AWS dynamic plugin to build Ansible hosts file. Here I took a different approach by using jinja template. Terraform's template rendering function is used to fill jumphost's public IP address.
 
 ```
 resource "local_file" "hosts" {
@@ -209,7 +209,6 @@ Here is how the login/logout logs look at Cloudwatch
 
 ```
 Jun 9 09:49:16 ip-10-0-1-101 sshd[4915]: Accepted publickey for ec2-user from 37.210.173.150 port 7679 ssh2: RSA SHA256:j826sZJNqf5LXjyoar4sazCbX2GHXL9Wsr5
-
 
 Jun  9 09:52:01 ip-10-0-1-101 sshd[4933]: Received disconnect from 37.210.173.150 port 7679:11: disconnected by user
 Jun 9 09:52:01 ip-10-0-1-101 sshd[4933]: Disconnected from 37.210.173.150 port 7679
