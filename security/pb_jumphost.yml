@@ -1,0 +1,26 @@
+---
+- hosts: jumphost
+  become: true
+  vars_files:
+    - vars/default.yml
+
+  tasks:
+    - name: Install AWS logs
+      yum:
+        name: awslogs
+        state: latest
+    - name: customize log file
+      lineinfile:
+        path: /etc/awslogs/awslogs.conf
+        regexp: '^file = /var/log/messages'
+        line: 'file = /var/log/secure'
+    - name: customize log file
+      lineinfile:
+        path: /etc/awslogs/awslogs.conf
+        regexp: '^log_group_name = /var/log/messages'
+        line: 'log_group_name = auth'        
+    - name: Make sure a service is running
+      systemd:
+        state: started
+        name: awslogsd
+        enabled: yes  

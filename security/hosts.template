@@ -1,0 +1,3 @@
+public_server ansible_host=10.0.1.100 ansible_ssh_user=ubuntu
+private_server ansible_host=10.0.2.100 ansible_ssh_user=ubuntu
+jumphost ansible_host=${ jumphost } ansible_ssh_user=ec2-user

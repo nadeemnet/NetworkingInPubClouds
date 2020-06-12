@@ -1,0 +1,22 @@
+host jumphost
+  user ec2-user
+  hostname ${ jumphost }
+  IdentitiesOnly yes
+  IdentityFile ~/NetworkingInPubClouds.pem
+  StrictHostKeyChecking no
+
+host public_server 10.0.1.100
+  user ubuntu
+  hostname 10.0.1.100
+  IdentitiesOnly yes
+  IdentityFile ~/NetworkingInPubClouds.pem
+  ProxyCommand ssh -F ssh-config -q -W %h:%p jumphost
+  StrictHostKeyChecking no
+
+host private_server 10.0.2.100
+  user ubuntu
+  hostname 10.0.2.100
+  IdentitiesOnly yes
+  IdentityFile ~/NetworkingInPubClouds.pem
+  ProxyCommand ssh -F ssh-config -q -W %h:%p jumphost
+  StrictHostKeyChecking no
