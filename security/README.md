@@ -1,4 +1,4 @@
-# Create Virtual Networking Infrastructure
+# Secure Your Public Cloud Deployment
 
 This project builds on top of the previous one. Here is a list of security measures carried from the previous project work.
 
