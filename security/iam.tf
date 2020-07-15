@@ -143,7 +143,15 @@ resource "aws_iam_role" "CloudWatchLogs" {
         },
         "Effect": "Allow",
         "Sid": ""
-      }
+      },
+       {
+        "Action": "sts:AssumeRole",
+        "Principal": {
+          "Service": "vpc-flow-logs.amazonaws.com"
+        },
+        "Effect": "Allow",
+        "Sid": ""
+      }  
     ]
   }
   EOF
