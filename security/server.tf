@@ -105,14 +105,14 @@ resource "aws_instance" "jumphost" {
 # Adding jumphost ip to hosts file
 resource "local_file" "hosts" {
   filename = "hosts"
-  content = templatefile("hosts.template", {jumphost = aws_instance.jumphost.public_ip})
+  content  = templatefile("hosts.template", { jumphost = aws_instance.jumphost.public_ip })
 }
 
 # Adding jumphost ip to ssh-config file
 resource "local_file" "ssh-config" {
-  filename = "ssh-config"
+  filename        = "ssh-config"
   file_permission = "0644"
-  content = templatefile("ssh-config.template", {jumphost = aws_instance.jumphost.public_ip})
+  content         = templatefile("ssh-config.template", { jumphost = aws_instance.jumphost.public_ip })
 }
 
 output "jumphost_ip" {

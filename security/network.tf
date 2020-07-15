@@ -1,17 +1,6 @@
 provider "aws" {
-  region = var.region
-  access_key = var.access_key
-  secret_key = var.secret_key
+  region = "us-east-1"
 }
-
-
-variable "region" {
-  type    = string
-  default = "us-east-1"
-}
-
-variable access_key {}
-variable secret_key {}
 
 ## create the VPC
 resource "aws_vpc" "nl-vpc" {
@@ -96,4 +85,19 @@ resource "aws_route_table_association" "s2" {
   depends_on     = [aws_subnet.s2]
   subnet_id      = aws_subnet.s2.id
   route_table_id = aws_route_table.rt_private.id
+}
+
+resource "aws_cloudwatch_log_group" "auth" {
+  name = "auth"
+}
+
+resource "aws_cloudwatch_log_group" "flows" {
+  name = "flows"
+}
+
+resource "aws_flow_log" "flow_log" {
+  iam_role_arn    = aws_iam_role.CloudWatchLogs.arn
+  log_destination = aws_cloudwatch_log_group.flows.arn
+  traffic_type    = "ALL"
+  vpc_id          = aws_vpc.nl-vpc.id
 }

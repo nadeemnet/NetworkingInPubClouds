@@ -15,6 +15,7 @@ This project builds on top of the previous one. Here is a list of security measu
 3. Create a IAM role that allows to send logs to AWS Cloudwatch Logs.
 4. Attach this role to jumphost and send all auth logs to Cloudwatch.
 5. An Ansible playbook installs awslogs package on jumphost and also configures it.
+6. Finally enable VPC Flow Logs to track IP flows.
 
 ## IAM Policy that allows read-only access to EC2 and VPC
 - First a policy is created
@@ -212,4 +213,19 @@ Jun 9 09:49:16 ip-10-0-1-101 sshd[4915]: Accepted publickey for ec2-user from 37
 
 Jun  9 09:52:01 ip-10-0-1-101 sshd[4933]: Received disconnect from 37.210.173.150 port 7679:11: disconnected by user
 Jun 9 09:52:01 ip-10-0-1-101 sshd[4933]: Disconnected from 37.210.173.150 port 7679
+```
+## Enable VPC Flow Logs
+Create a CloudWatch Logs group "flows"
+
+```
++resource "aws_cloudwatch_log_group" "flows" {
++  name = "flows"
++}
++
++resource "aws_flow_log" "flow_log" {
++  iam_role_arn    = aws_iam_role.CloudWatchLogs.arn
++  log_destination = aws_cloudwatch_log_group.flows.arn
++  traffic_type    = "ALL"
++  vpc_id          = aws_vpc.nl-vpc.id
++}
 ```
